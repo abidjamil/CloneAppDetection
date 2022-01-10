@@ -1,8 +1,9 @@
-package com.abidjamil.cloneappdetection
+package com.abidjamil.cloneappdetectionsample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.abidjamil.cloneappdetection.CloneDetection
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
