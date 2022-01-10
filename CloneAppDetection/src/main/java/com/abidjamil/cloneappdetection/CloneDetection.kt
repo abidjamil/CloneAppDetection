@@ -4,34 +4,41 @@ import android.content.Context
 import android.os.Build
 import android.util.Log
 
-class CloneDetection(val context: Context, val packageName : String ) {
+class CloneDetection(private val context: Context, private val packageName : String ) {
 
-    private val DUAL_APP_ID_999 = "999"
-    private val DOT = '.'
-    private var reason = "Original App";
+    private val dualAppId = "999"
+    private val dot = '.'
+    private var reason = "Original App"
 
-    companion object {
-        enum class CloneType {
-            OEM, SecondSpace, ThirdParty,
-        }
+    enum class CloneType {
+        OEM, SecondSpace, ThirdParty,
     }
-    private fun countOccurrences(s: String, ch: Char): Int {
-        return s.filter { it == ch }.count()
+
+    private fun countOccurrences(s: String): Int {
+        return s.filter { it == dot }.count()
     }
 
      fun checkAppCloning() : Boolean {
-        val path: String = context.getFilesDir().getPath()
+        val path: String = context.filesDir.path
         val pathStrings = path.split("/".toRegex()).toTypedArray()
-        if (path.contains(DUAL_APP_ID_999)) {
+        if (path.contains(dualAppId)) {
             reason = CloneType.OEM.toString()
             return true
         } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1 && pathStrings.size > 3 && pathStrings[3] != "0") {
             reason = CloneType.SecondSpace.toString()
             return true
         } else {
-            val APP_PACKAGE_DOT_COUNT = countOccurrences(packageName,DOT)
-            val count = getDotCount(path)
-            if (count > APP_PACKAGE_DOT_COUNT) {
+            val appPackageDotCount = countOccurrences(packageName)
+            var count = 0
+            for (element in path) {
+                if (count > appPackageDotCount) {
+                    break
+                }
+                if (element == dot) {
+                    count++
+                }
+            }
+            if (count > appPackageDotCount) {
                 reason = CloneType.ThirdParty.toString()
                 return true
             }
@@ -39,20 +46,7 @@ class CloneDetection(val context: Context, val packageName : String ) {
          return false
     }
     fun getCloneDetails() : String {
-        checkAppCloning();
+        checkAppCloning()
         return reason
-    }
-    private fun getDotCount(path: String): Int {
-        val APP_PACKAGE_DOT_COUNT = countOccurrences(packageName,DOT)
-        var count = 0
-        for (i in 0 until path.length) {
-            if (count > APP_PACKAGE_DOT_COUNT) {
-                break
-            }
-            if (path[i] == DOT) {
-                count++
-            }
-        }
-        return count
     }
 }
