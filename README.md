@@ -43,7 +43,7 @@ and:
 
 ```gradle
 dependencies {
-    compile 'com.github.jitpack:android-example:{latest version}'
+   implementation 'com.github.abidjamil:CloneAppDetection:{latest_version}'
 }
 ```
 
