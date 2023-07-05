@@ -67,7 +67,7 @@ Feel free to check [issues](https://github.com/abidjamil/CloneAppDetection/issue
 ## About Me
 
 <h1 align="center">Hi 👋, I'm Abid Jamil</h1>
-<h3 align="center">🧑🏽‍💻Technical Lead @ GrocerApp </h3>
+<h3 align="center">🧑🏽‍💻Engineering Manager @ Jugnu </h3>
 <p align="center">
 	<a href="https://www.linkedin.com/in/abidjamil"><img src="https://img.shields.io/badge/LinkedIn--_.svg?style=social&logo=linkedin" alt="LinkedIn"></a>  
   <a href="https://github.com/abidjamil"><img src="https://img.shields.io/github/followers/wajahatkarim3.svg?label=GitHub&style=social" alt="GitHub"></a>  
